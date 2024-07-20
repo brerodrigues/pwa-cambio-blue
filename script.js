@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
         numeralThousandsGroupStyle: "thousand",
         numeralDecimalMark: ",",
         delimiter: ".",
+        prefix: "ARS ", // Prefixo para Peso
+        noImmediatePrefix: true,
+        rawValueTrimPrefix: true,
     });
 
     const cleaveRealValue = new Cleave(realValueInput, {
@@ -23,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
         numeralThousandsGroupStyle: "thousand",
         numeralDecimalMark: ",",
         delimiter: ".",
+        prefix: "R$ ", // Prefixo para Real
+        noImmediatePrefix: true,
+        rawValueTrimPrefix: true,
     });
 
     // Carregar o valor do câmbio salvo do localStorage
@@ -33,9 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Função para atualizar os valores com base no câmbio
     const updateValues = () => {
-        const exchangeRate = cleaveExchangeRate.getRawValue();
-        const pesoValue = cleavePesoValue.getRawValue();
-        const realValue = cleaveRealValue.getRawValue();
+        const exchangeRate = parseFloat(cleaveExchangeRate.getRawValue());
+        const pesoValue = parseFloat(cleavePesoValue.getRawValue());
+        const realValue = parseFloat(cleaveRealValue.getRawValue());
 
         if (!isNaN(exchangeRate) && !isNaN(pesoValue)) {
             cleaveRealValue.setRawValue((pesoValue / exchangeRate).toFixed(2));
@@ -53,17 +59,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     pesoValueInput.addEventListener("input", () => {
-        const exchangeRate = cleaveExchangeRate.getRawValue();
-        const pesoValue = cleavePesoValue.getRawValue();
-        if (!isNaN(exchangeRate)) {
+        const exchangeRate = parseFloat(cleaveExchangeRate.getRawValue());
+        const pesoValue = parseFloat(cleavePesoValue.getRawValue());
+        if (!isNaN(exchangeRate) && !isNaN(pesoValue)) {
             cleaveRealValue.setRawValue((pesoValue / exchangeRate).toFixed(2));
         }
     });
 
     realValueInput.addEventListener("input", () => {
-        const exchangeRate = cleaveExchangeRate.getRawValue();
-        const realValue = cleaveRealValue.getRawValue();
-        if (!isNaN(exchangeRate)) {
+        const exchangeRate = parseFloat(cleaveExchangeRate.getRawValue());
+        const realValue = parseFloat(cleaveRealValue.getRawValue());
+        if (!isNaN(exchangeRate) && !isNaN(realValue)) {
             cleavePesoValue.setRawValue((realValue * exchangeRate).toFixed(2));
         }
     });
