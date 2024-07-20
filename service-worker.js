@@ -1,13 +1,13 @@
 const CACHE_NAME = "exchange-rate-cache-v1";
 const urlsToCache = [
-    "/",
-    "/index.html",
-    "/styles.css",
-    "/script.js",
-    "/cleave.min.js",
-    "/manifest.json",
-    "/icon-192x192.png",
-    "/icon-512x512.png",
+    "/pwa-cambio-blue/",            // Página inicial
+    "/pwa-cambio-blue/index.html",  // HTML principal
+    "/pwa-cambio-blue/styles.css",  // CSS
+    "/pwa-cambio-blue/script.js",   // JavaScript
+    "/pwa-cambio-blue/cleave.min.js", // Cleave.js
+    "/pwa-cambio-blue/manifest.json", // Manifesto
+    "/pwa-cambio-blue/icon-192x192.png", // Ícone de 192x192
+    "/pwa-cambio-blue/icon-512x512.png", // Ícone de 512x512
 ];
 
 self.addEventListener("install", (event) => {
